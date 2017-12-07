@@ -1,0 +1,15 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(387,5): warning MSB8028: 중간 디렉터리(Debug\)에 다른 프로젝트(SW_Termproject_alpha.vcxproj, SW_Termproject_alpha_구1.vcxproj)에서 공유하는 파일이 포함되어 있습니다.  이로 인해 잘못된 정리 및 다시 빌드 동작이 수행될 수 있습니다.
+  main.c
+c:\users\seokw\desktop\구버저너\sw_termproject_exception1\sw_termproject_alpha\main.c(29): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(343): note: 'strncpy' 선언을 참조하십시오.
+c:\users\seokw\desktop\구버저너\sw_termproject_exception1\sw_termproject_alpha\main.c(46): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1272): note: 'scanf' 선언을 참조하십시오.
+c:\users\seokw\desktop\구버저너\sw_termproject_exception1\sw_termproject_alpha\main.c(86): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: 'fopen' 선언을 참조하십시오.
+c:\users\seokw\desktop\구버저너\sw_termproject_exception1\sw_termproject_alpha\main.c(89): warning C4047: '초기화 중': 'char'의 간접 참조 수준이 'void *'과(와) 다릅니다.
+c:\users\seokw\desktop\구버저너\sw_termproject_exception1\sw_termproject_alpha\main.c(99): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\seokw\desktop\구버저너\sw_termproject_exception1\sw_termproject_alpha\main.c(124): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(343): note: 'strncpy' 선언을 참조하십시오.
+  SW_Termproject_alpha.vcxproj -> C:\Users\seokw\Desktop\구버저너\SW_Termproject_exception1\Debug\SW_Termproject_alpha_exception1.exe
+  SW_Termproject_alpha.vcxproj -> C:\Users\seokw\Desktop\구버저너\SW_Termproject_exception1\Debug\SW_Termproject_alpha_exception1.pdb (Partial PDB)
