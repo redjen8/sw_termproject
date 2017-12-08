@@ -22,14 +22,14 @@ struct file_list
 
 char* search_word;
 int word_length = 0;
-char* problem = "125313newsML.txt";
+int right_file_cnt = 0;
 
-void list_substitute(struct file_list a, struct file_list b)
+void list_substitute(struct file_list* a, struct file_list* b)
 {
-	strncpy(a.file_name, b.file_name, sizeof(b.file_name));
-	a.search_result = b.search_result;
-	a.file_size = b.file_size;
-	a.result_portion = b.result_portion;
+	strncpy(a->file_name, b->file_name, sizeof(b->file_name));
+	a->search_result = b->search_result;
+	a->file_size = b->file_size;
+	a->result_portion = b->result_portion;
 }
 
 void current_file_address()
@@ -44,13 +44,13 @@ void input_searchword()
 {
 	search_word = (char*)malloc(sizeof(char)*WORD_LENGTH);
 	scanf(" %s", search_word);
-	word_length = strlen(search_word);	
+	word_length = strlen(search_word);
 }//키워드 입력 받는 함수
 
 void result_sort(struct file_list* fl, int left, int right)
 {
 	int L = left, R = right;
-	struct file_list temp;
+	struct file_list temp = { "0", 0, 0, 0.0 };
 	int pivot = fl[(left + right) / 2].search_result; //피봇 위치(중앙)의 값을 받음.
 	while (L <= R)
 	{
@@ -63,12 +63,12 @@ void result_sort(struct file_list* fl, int left, int right)
 		if (L <= R)
 		{ //현재 L이 R이하면. (이유 : L>R 부분은 이미 정리가 된 상태임).
 			if (L != R)
-			{ 
-				temp = fl[L];
-				fl[L] = fl[R];
-				fl[R] = temp;
+			{
+				list_substitute(&temp, &fl[L]);
+				list_substitute(&fl[L], &fl[R]);
+				list_substitute(&fl[R], &temp);
 			} //L과 R이 같다면 교환(SWAP)은 필요 없고 한 칸씩 진행만 해주면 됨.
-			L++; R--; 
+			L++; R--;
 		}
 	}
 	if (left < R)
@@ -84,9 +84,7 @@ void result_sort(struct file_list* fl, int left, int right)
 int string_search(char* file_name, int file_size)
 {
 	FILE* fp = fopen(file_name, "rt");
-	
 	char file_content[10000];
-	char file_buf = NULL;
 	int i = 0, result_cnt = 0;
 	if (fp == NULL)
 	{
@@ -97,7 +95,6 @@ int string_search(char* file_name, int file_size)
 	while (!feof(fp))
 	{
 		fscanf(fp, "%s", file_content);
-		file_content[i++] = file_buf;
 		if (!_strnicmp(file_content, search_word, strlen(search_word)))
 		{
 			result_cnt++;
@@ -123,9 +120,9 @@ void file_init()
 	{
 		strncpy(fl[i].file_name, fd.name, sizeof(fd.name)); //구조체에 파일 이름 저장
 		fl[i].search_result = string_search(fd.name, fl[i].file_size);
-		if (fl[i].search_result == 6)
+		if (fl[i].search_result != 0)
 		{
-			printf("\n찾았다!\n\n");
+			right_file_cnt++;
 		}
 		fl[i].file_size = fd.size; //구조체에 파일 크기 저장
 		fl[i].result_portion = (float)fl[i].search_result * word_length / fl[i].file_size * 100;
@@ -137,7 +134,7 @@ void file_init()
 
 int main()
 {
-	int i, file_cnt = 0;
+	int i;
 	float time_measure;
 	time_t startTime = 0, endTime = 0;
 	printf("단어 검색 프로그램\n");
@@ -158,16 +155,15 @@ int main()
 	{
 		if (fl[i].search_result != 0)
 		{
-			file_cnt++;
 			printf("%s : %d개의 %s, 키워드 출현 빈도는 %.3f%%\n", fl[i].file_name, fl[i].search_result, search_word, fl[i].result_portion);
 		}
 	}
-	if (file_cnt == 0)
+	if (right_file_cnt == 0)
 	{
 		printf("키워드 탐색 결과 없음.\n");
 	}
 	printf("\n탐색 종료. 걸린 시간 : %fs\n", time_measure);
-	printf("%d개 중 키워드 포함한 파일은 %d개, 빈도는 %.3f%%.\n\n", FILE_NUM, file_cnt, (float)file_cnt/FILE_NUM*100);
+	printf("%d개 중 키워드 포함한 파일은 %d개, 빈도는 %.3f%%.\n\n", FILE_NUM, right_file_cnt, (float)right_file_cnt / FILE_NUM * 100);
 	free(search_word);
 	system("pause");
 	return 0;
