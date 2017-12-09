@@ -138,7 +138,7 @@ int main()
 	float time_measure;
 	time_t startTime = 0, endTime = 0;
 	printf("단어 검색 프로그램\n");
-	//current_file_address();
+	current_file_address();
 
 	printf("\n\n영문자 소문자로 키워드를 입력해주세요 : \n");
 	input_searchword();
